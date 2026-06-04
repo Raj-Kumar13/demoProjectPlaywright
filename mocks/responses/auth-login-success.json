@@ -1,0 +1,11 @@
+{
+  "success": true,
+  "token": "jwt-token-123",
+  "refreshToken": "refresh-token-456",
+  "user": {
+    "id": 101,
+    "name": "John Smith",
+    "email": "john@test.com",
+    "role": "customer"
+  }
+}
