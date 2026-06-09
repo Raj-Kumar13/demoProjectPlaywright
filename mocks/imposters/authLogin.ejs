@@ -1,33 +1,24 @@
 {
     "predicates": [
         {
-            "and": [
-                {
-                    "equals": {
-                        "method": "POST"
-                    }
-                },
-                {
-                    "equals": {
-                        "path": "/auth/login"
-                    }
-                },
-                {
-                    "equals": {
-                        "body": "{\"email\":\"john@test.com\",\"password\":\"Password123\"}"
-                    }
+            "equals": {
+                "method": "POST",
+                "path": "/auth/login",
+                "body": {
+                    "email": "john@test.com",
+                    "password": "Password123"
                 }
-            ]
+            }
         }
     ],
     "responses": [
         {
             "is": {
-                "statusCode": 200,
+                "statusCode": 201,
                 "headers": {
                     "Content-Type": "application/json"
                 },
-                "body": <% stringify(filename,'responses/auth-login-success.json') %>
+                "body": "<%- stringify(filename,'responses/auth-login-success.json') %>"
             }
         }
     ]
@@ -35,18 +26,10 @@
 {
     "predicates": [
         {
-            "and": [
-                {
-                    "equals": {
-                        "method": "POST"
-                    }
-                },
-                {
-                    "equals": {
-                        "path": "/auth/login"
-                    }
-                }
-            ]
+            "equals": {
+                "method": "POST",
+                "path": "/auth/login"
+            }
         }
     ],
     "responses": [
@@ -56,7 +39,7 @@
                 "headers": {
                     "Content-Type": "application/json"
                 },
-                "body": <% stringify(filename,'responses/auth-login-failure.json') %>
+                "body": "<%- stringify(filename,'responses/auth-login-failure.json') %>"
             }
         }
     ]
