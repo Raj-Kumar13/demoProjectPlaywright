@@ -1,9 +1,13 @@
 name: Build and Test
 on:
   pull_request:
-    branches: -"main" -"feature/**"
+    branches:
+      - main
+      - 'feature/**'
   push:
-    branches: -"main" -"feature/**"
+    branches:
+      - main
+      - 'feature/**'
   workflow_dispatch:
     inputs:
       environment:
