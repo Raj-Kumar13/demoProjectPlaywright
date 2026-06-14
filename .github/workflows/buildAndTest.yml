@@ -4,6 +4,10 @@ on:
         branches:
             -"main"
             -"feature/**"
+    push:
+        branches:
+            -"main"
+            -"feature/**"
     workflow_dispatch:
         inputs:
             environment:
