@@ -1,0 +1,32 @@
+name: Build and Test
+on:
+    pull_request:
+        branches:
+            -"main"
+            -"feature/**"
+    workflow_dispatch:
+        inputs:
+            environment:
+                type: choice
+                description: 'Select the environment to run tests'
+                required: false
+                options:
+                    - local
+                    - dev
+                default: local
+jobs:
+    install-os:
+        name: Install OS dependencies
+        runs-on: ubuntu-latest
+        steps:
+            - name: check out the repo
+              uses: actions/checkout@v4
+
+            - name: Install NodeJS
+              uses: actions/setup-node@v4
+
+            - name: Clean up node files
+              uses: actions/cache@v3
+
+            - name: Install dependencies
+              run: npm install
