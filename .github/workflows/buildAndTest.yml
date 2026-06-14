@@ -17,7 +17,6 @@ on:
         options:
           - local
           - dev
-        default: local
 jobs:
   install-os:
     name: Install OS dependencies
@@ -31,3 +30,6 @@ jobs:
         uses: actions/cache@v3
       - name: Install dependencies
         run: npm install
+      - name: testing echo
+        run: | 
+          echo "github repository": ${{github.repository}}
