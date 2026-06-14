@@ -13,10 +13,15 @@ on:
       environment:
         type: choice
         description: Select the environment to run tests
-        required: false
+        required: true
         options:
           - local
           - dev
+      branch:
+        type: string
+        description: Branch to run tests on
+        required: false
+        default: develop
 jobs:
   install-os:
     name: Install OS dependencies
