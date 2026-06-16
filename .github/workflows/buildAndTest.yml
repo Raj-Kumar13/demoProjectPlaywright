@@ -22,6 +22,10 @@ on:
         description: Branch to run tests on
         required: false
         default: develop
+
+env:
+  NODE_ENV: test
+
 jobs:
   install-os:
     name: Install OS dependencies
@@ -37,4 +41,4 @@ jobs:
         run: npm install
       - name: testing echo
         run: | 
-          echo "github repository": ${{github.repository}}
+          echo "github repository": ${{github.repository}} $NODE_ENV
