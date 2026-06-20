@@ -1,10 +1,10 @@
 import { faker } from '@faker-js/faker';
-import { ICollection } from "../interface/ICollections";
+import { ICollection, ICollectionMandatoryFields } from "../interface/ICollections";
 import { stateCode } from "../../types/LegalEntityPersonal";
 import { ApplicationTypes, LK_CSD_LIST_TYPE, sourcCollection, UDFKeyCollections } from "../../types/Collections";
 import { IRefs, IUserDefinedFields } from '../interface/ICommonFields';
 
-export const collection = (data: {
+export const collection = (data?: {
   refs?: IRefs<sourcCollection>[];
   userDefinedFields?: IUserDefinedFields<UDFKeyCollections>[];
   stateCode: stateCode;
@@ -23,7 +23,7 @@ export const collection = (data: {
   return {
     ifUnmodifiedSince: `UNF-${faker.date.recent().toISOString()}`,
     id: faker.string.uuid(),
-    refs: data.refs ?? [
+    refs: data?.refs ?? [
       {
         source: 'CAPACC',
         value: faker.string.alphanumeric(4),
@@ -31,7 +31,7 @@ export const collection = (data: {
         primary: true,
       },
     ],
-    userDefinedFields: data.userDefinedFields ?? [
+    userDefinedFields: data?.userDefinedFields ?? [
       {
         key: 'Collection.EventVersionID',
         value: faker.string.alphanumeric(8),
@@ -45,17 +45,27 @@ export const collection = (data: {
         value: faker.string.alphanumeric(8),
       }
     ],
-    stateCode: data.stateCode ?? 'A' as stateCode,
-    reportingCodes: data.reportingCodes ?? [],
-    typeCode: data.typeCode ?? ApplicationTypes.SecuritySchedule,
-    externalReferenceIdentifier: data.externalReferenceIdentifier ?? faker.string.alphanumeric(12),
-    nominalCollateralAmount: data.nominalCollateralAmount ?? faker.finance.amount({ min: 1000, max: 5000, dec: 2 }),
-    nominalExposureAmount: data.nominalExposureAmount ?? faker.finance.amount({ min: 500, max: 4000, dec: 2 }),
-    propsalDate: data.acceptanceDate ?? faker.date.past().toISOString(),
-    expirationDate: data.expirationDate ?? faker.date.future().toISOString(),
-    acceptanceDate: data.acceptanceDate ?? faker.date.past().toISOString(),
-    acceptanceReviewDate: data.acceptanceReviewDate ?? faker.date.recent().toISOString(),
-    acceptanceDays: data.acceptanceDays ?? faker.string.numeric(2),
-    csdListCollCd: data.csdListCollCd ?? LK_CSD_LIST_TYPE.Approved,
+    stateCode: data?.stateCode ?? 'A' as stateCode,
+    reportingCodes: data?.reportingCodes ?? [],
+    typeCode: data?.typeCode ?? ApplicationTypes.SecuritySchedule,
+    externalReferenceIdentifier: data?.externalReferenceIdentifier ?? faker.string.alphanumeric(12),
+    nominalCollateralAmount: data?.nominalCollateralAmount ?? faker.finance.amount({ min: 1000, max: 5000, dec: 2 }),
+    nominalExposureAmount: data?.nominalExposureAmount ?? faker.finance.amount({ min: 500, max: 4000, dec: 2 }),
+    propsalDate: data?.acceptanceDate ?? faker.date.past().toISOString(),
+    expirationDate: data?.expirationDate ?? faker.date.future().toISOString(),
+    acceptanceDate: data?.acceptanceDate ?? faker.date.past().toISOString(),
+    acceptanceReviewDate: data?.acceptanceReviewDate ?? faker.date.recent().toISOString(),
+    acceptanceDays: data?.acceptanceDays ?? faker.string.numeric(2),
+    csdListCollCd: data?.csdListCollCd ?? LK_CSD_LIST_TYPE.Approved,
   };
 };
+export const collectionMandatoryFields = (data?: {
+  stateCode: stateCode;
+  typeCode: ApplicationTypes;
+}): ICollectionMandatoryFields => {
+  return {
+    id: faker.string.uuid(),
+    stateCode: data?.stateCode ?? 'A' as stateCode,
+    typeCode: data?.typeCode ?? ApplicationTypes.SecuritySchedule,
+  }
+}

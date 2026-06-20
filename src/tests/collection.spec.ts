@@ -1,5 +1,5 @@
 import test from "@playwright/test";
-import { collection } from "../entity/payloads/collection.data";
+import { collection, collectionMandatoryFields } from "../entity/payloads/collection.data";
 import { ApplicationTypes } from "../types/Collections";
 
 test.describe("Collection API Tests", () => {
@@ -10,6 +10,10 @@ test.describe("Collection API Tests", () => {
         typeCode: ApplicationTypes.Release,
         acceptanceDays: '30'
       });
+      console.log(collectionData);
+    });
+    await test.step("Test Data Creation Only Mandatory Fields for Collection API", async () => {
+      const collectionData = collectionMandatoryFields();
       console.log(collectionData);
     });
   });
