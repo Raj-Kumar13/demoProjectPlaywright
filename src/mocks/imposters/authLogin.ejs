@@ -1,0 +1,46 @@
+{
+    "predicates": [
+        {
+            "equals": {
+                "method": "POST",
+                "path": "/auth/login",
+                "body": {
+                    "email": "john@test.com",
+                    "password": "Password123"
+                }
+            }
+        }
+    ],
+    "responses": [
+        {
+            "is": {
+                "statusCode": 201,
+                "headers": {
+                    "Content-Type": "application/json"
+                },
+                "body": "<%- stringify(filename,'responses/auth-login-success.json') %>"
+            }
+        }
+    ]
+},
+{
+    "predicates": [
+        {
+            "equals": {
+                "method": "POST",
+                "path": "/auth/login"
+            }
+        }
+    ],
+    "responses": [
+        {
+            "is": {
+                "statusCode": 401,
+                "headers": {
+                    "Content-Type": "application/json"
+                },
+                "body": "<%- stringify(filename,'responses/auth-login-failure.json') %>"
+            }
+        }
+    ]
+}

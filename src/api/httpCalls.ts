@@ -1,20 +1,19 @@
-import { APIRequestContext, APIResponse, request } from "@playwright/test";
+import { APIRequestContext, request } from "@playwright/test";
 
 
-export const posthttpCall = async (url: string, payload: any) => {
+export const postHttpCall = async (url: string, payload: any) => {
 
-  
+
     const apiContext = await request.newContext();
     try {
 
-      const   response = await apiContext.post(url, {
+        const response = await apiContext.post(url, {
             data: payload,
             ignoreHTTPSErrors: true
         });
-        const body = await response.json();
         return {
             status: response.status(),
-            body: body,
+            body: response.ok() ? await response.json() : await response.text(),
             headers: response.headers()
         }
     }
@@ -25,7 +24,4 @@ export const posthttpCall = async (url: string, payload: any) => {
     finally {
         await apiContext.dispose();
     }
-
-
-
 }

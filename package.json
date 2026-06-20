@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "mock": "mb --configfile mocks/imposters.ejs --allowInjection --loglevel debug --debug"
+    "mock": "mb --configfile mocks/imposters.ejs --allowInjection --loglevel debug --debug",
+    "test": "npx playwright test ./*.spec.ts"
   },
   "repository": {
     "type": "git",
@@ -18,11 +19,12 @@
   "homepage": "https://github.com/vinitmalhotra/demoProjectPlaywright#readme",
   "description": "",
   "devDependencies": {
+    "@faker-js/faker": "^10.5.0",
     "@playwright/test": "^1.60.0",
     "@types/node": "^25.9.0",
     "dotenv": "^17.4.2"
   },
   "dependencies": {
-    "@mbtest/mountebank": "^2.9.4"
+    "@mbtest/mountebank": "^2.9.2"
   }
 }

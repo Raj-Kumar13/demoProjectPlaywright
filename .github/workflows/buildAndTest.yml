@@ -1,0 +1,44 @@
+name: Build and Test
+on:
+  pull_request:
+    branches:
+      - main
+      - 'feature/**'
+  push:
+    branches:
+      - main
+      - 'feature/**'
+  workflow_dispatch:
+    inputs:
+      environment:
+        type: choice
+        description: Select the environment to run tests
+        required: true
+        options:
+          - local
+          - dev
+      branch:
+        type: string
+        description: Branch to run tests on
+        required: false
+        default: develop
+
+env:
+  NODE_ENV: test
+
+jobs:
+  install-os:
+    name: Install OS dependencies
+    runs-on: ubuntu-latest
+    steps:
+      - name: check out the repo
+        uses: actions/checkout@v4
+      - name: Install NodeJS
+        uses: actions/setup-node@v4
+      - name: Install dependencies
+        run: npm install
+      - name: testing echo
+        run: | 
+          echo "github repository": ${{github.repository}} $NODE_ENV
+          echo "github chosen environment name": ${{github.event.inputs.environment}}
+          echo "github chosen branch name": ${{github.event.inputs.branch}}
