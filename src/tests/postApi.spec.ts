@@ -12,7 +12,9 @@ test.describe("Testing of all API calls", () => {
             data
         );
         console.log(JSON.stringify(response.body, null, 2));
+
         expect(response.status).toBe(201);
+        
         expect(response.body).toMatchObject({
             success: true,
             token: 'jwt-token-123',
